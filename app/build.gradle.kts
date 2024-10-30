@@ -41,7 +41,10 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    // Dependencias de Android Room
     implementation("androidx.room:room-runtime:2.5.0")
     annotationProcessor ("androidx.room:room-compiler:2.5.0")
+    // Dependencia BCrypt
+    implementation ("de.svenkubiak:jBCrypt:0.4.3")
 
 }

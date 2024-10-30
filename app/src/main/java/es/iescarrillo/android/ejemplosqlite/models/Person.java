@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Embedded;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 
 // La anotación @Entity sirve para transformar a clase Java en una entidad de la BBDD
-@Entity(tableName = "PERSON")
+@Entity(tableName = "PERSON", foreignKeys = {@ForeignKey(entity = UserAccount.class, parentColumns = "id",
+        childColumns = "user_account_id", onDelete = ForeignKey.CASCADE)})
 public class Person  implements Serializable {
 
     // La anotación PrimaryKey autogenerate permite indicar que es la clave primaria y se va autogenerar
@@ -34,8 +36,12 @@ public class Person  implements Serializable {
     @Embedded
     private Address address;
 
-    public Person(){
+    @NonNull
+    @ColumnInfo(name = "user_account_id")
+    private long userAccountId;
 
+    public Person(){
+        super();
     }
 
     public long getId() {
@@ -86,6 +92,14 @@ public class Person  implements Serializable {
         this.address = address;
     }
 
+    public long getUserAccountId() {
+        return userAccountId;
+    }
+
+    public void setUserAccountId(long userAccountId) {
+        this.userAccountId = userAccountId;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -94,6 +108,7 @@ public class Person  implements Serializable {
                 ", surname='" + surname + '\'' +
                 ", age=" + age +
                 ", email='" + email + '\'' +
+                ", userAccountId='" + userAccountId + '\'' +
                 ", address=" + address.toString() +
                 '}';
     }

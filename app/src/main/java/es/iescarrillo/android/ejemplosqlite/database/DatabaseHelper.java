@@ -9,15 +9,18 @@ import androidx.room.RoomDatabase;
 
 import es.iescarrillo.android.ejemplosqlite.daos.CarDao;
 import es.iescarrillo.android.ejemplosqlite.daos.PersonDao;
+import es.iescarrillo.android.ejemplosqlite.daos.UserAccountDao;
 import es.iescarrillo.android.ejemplosqlite.models.Car;
 import es.iescarrillo.android.ejemplosqlite.models.Person;
+import es.iescarrillo.android.ejemplosqlite.models.UserAccount;
 
-@Database(entities = {Person.class, Car.class}, version = 5)
+@Database(entities = {Person.class, Car.class, UserAccount.class}, version = 6)
 public abstract class DatabaseHelper extends RoomDatabase{
 
     // Añadir los DAOs
     public abstract PersonDao personDao();
     public abstract CarDao carDao();
+    public abstract UserAccountDao userAccountDao();
 
     // Singleton => variable estática y única en tod_o el proyecto
     // en nuestro caso va a ser la instancia de la BBDD
