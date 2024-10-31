@@ -35,7 +35,7 @@
             android:background="@drawable/rounded_edittext_background"/>
 
         <EditText
-            android:id="@+id/etPassword"
+            android:id="@+id/etPasswordLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"

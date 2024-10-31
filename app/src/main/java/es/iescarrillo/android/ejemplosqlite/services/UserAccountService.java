@@ -15,7 +15,7 @@ public class UserAccountService implements UserAccountDao {
     private UserAccountDao userAccountDao;
     private long resultInsert;
     private List<UserAccount> resultGetAll;
-    private UserAccount resultGetById;
+    private UserAccount resultGetById, resultGetByUsername;
 
     public UserAccountService(Application application){
         // Llamamos a la instancia de la BBDD con el contexto del parámetro application
@@ -70,5 +70,21 @@ public class UserAccountService implements UserAccountDao {
         }
 
         return resultGetById;
+    }
+
+    @Override
+    public UserAccount getUserAccountByUsername(String username) {
+        Thread thread = new Thread(() -> {
+            resultGetByUsername = userAccountDao.getUserAccountByUsername(username);
+        });
+
+        thread.start();
+        try {
+            thread.join();
+        } catch (Exception e){
+            Log.e("Error - UserAccountService - getUserAccountByUsername", e.toString());
+        }
+
+        return resultGetByUsername;
     }
 }

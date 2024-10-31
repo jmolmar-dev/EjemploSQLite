@@ -1,6 +1,8 @@
 package es.iescarrillo.android.ejemplosqlite.activities;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
     private PersonAdapter personAdapter;
     private List<Person> personList;
     private EditText etPassword;
+    private TextView tvUsername;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +69,14 @@ public class MainActivity extends AppCompatActivity {
         btnInsert = findViewById(R.id.btnInsertPerson);
         etPassword = findViewById(R.id.etPassword);
         btnCheck = findViewById(R.id.btnCheckPassword);
+        tvUsername = findViewById(R.id.tvUsername);
+
+        // Obtener el contenedor de las variables de sesión
+        SharedPreferences sharedPreferences = getSharedPreferences("SESSION", Context.MODE_PRIVATE);
+
+        String username = sharedPreferences.getString("username","No te has logueado");
+        long id = sharedPreferences.getLong("id", 0);
+        tvUsername.setText(username + " - " + id);
 
         refresh();
 

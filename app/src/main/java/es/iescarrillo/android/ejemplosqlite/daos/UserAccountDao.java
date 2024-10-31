@@ -19,4 +19,7 @@ public interface UserAccountDao {
 
     @Query("SELECT * FROM USER_ACCOUNT WHERE id = :id")
     UserAccount getUserAccountById(long id);
+
+    @Query("SELECT * FROM USER_ACCOUNT WHERE username = :username")
+    UserAccount getUserAccountByUsername(String username);
 }
